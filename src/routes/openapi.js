@@ -32,9 +32,6 @@ async function storePathsInRedis(paths) {
       console.log(`Storing key: ${key}`);
       await redisClient.set(key, value);
       
-      // Verify the value was stored
-      const storedValue = await redisClient.get(key);
-      console.log(`Verified stored value for ${key}:`, storedValue ? 'Success' : 'Failed');
     }
 
     // Store list of all paths
@@ -42,9 +39,6 @@ async function storePathsInRedis(paths) {
     console.log('Storing all paths list:', allPaths);
     await redisClient.set('all_paths', JSON.stringify(allPaths));
     
-    // Verify all paths were stored
-    const storedPaths = await redisClient.get('all_paths');
-    console.log('Verified stored paths list:', storedPaths ? 'Success' : 'Failed');
     
     console.log('Successfully stored all paths in Redis');
   } catch (error) {
